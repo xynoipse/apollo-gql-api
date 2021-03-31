@@ -12,6 +12,7 @@ connectDB();
 const server: ApolloServer = new ApolloServer({
   typeDefs,
   resolvers,
+  context: ({ req }) => ({ req }),
 });
 
 server.listen({ port: process.env.PORT }).then((res: ServerInfo) => {
