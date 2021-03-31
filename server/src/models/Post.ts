@@ -27,11 +27,13 @@ export interface Post {
   body: string;
   username: string;
   comments: {
+    id?: any;
     body: string;
     username: string;
     createdAt: string;
   }[];
   likes: {
+    id?: any;
     username: string;
     createdAt: string;
   }[];

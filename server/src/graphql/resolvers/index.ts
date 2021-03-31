@@ -1,5 +1,6 @@
 import postsResolvers from './post';
 import usersResolvers from './users';
+import commentsResolvers from './comments';
 
 export default {
   Query: {
@@ -8,5 +9,6 @@ export default {
   Mutation: {
     ...usersResolvers.Mutation,
     ...postsResolvers.Mutation,
+    ...commentsResolvers.Mutation,
   },
 };
