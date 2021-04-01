@@ -1,4 +1,4 @@
-import { ApolloServer, ServerInfo } from 'apollo-server';
+import { ApolloServer, PubSub, ServerInfo } from 'apollo-server';
 import dotenv from 'dotenv';
 import connectDB from './config/db';
 
@@ -9,10 +9,12 @@ dotenv.config();
 
 connectDB();
 
+const pubsub = new PubSub();
+
 const server: ApolloServer = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => ({ req }),
+  context: ({ req }) => ({ req, pubsub }),
 });
 
 server.listen({ port: process.env.PORT }).then((res: ServerInfo) => {

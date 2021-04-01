@@ -34,6 +34,11 @@ const postsResolvers = {
       });
 
       const post = await newPost.save();
+
+      context.pubsub.publish('NEW_POST', {
+        newPost: post,
+      });
+
       return post;
     },
     async deletePost(_, { postId }, context) {
@@ -67,6 +72,11 @@ const postsResolvers = {
 
       await post.save();
       return post;
+    },
+  },
+  Subscription: {
+    newPost: {
+      subscribe: (_, __, { pubsub }) => pubsub.asyncIterator('NEW_POST'),
     },
   },
 };
